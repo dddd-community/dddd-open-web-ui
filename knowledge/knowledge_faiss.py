@@ -11,12 +11,12 @@ class KnowledgeFaiss:
         self.build_index()
 
     def build_index(self):
-        print("[KnowledgeFaiss] 构建向量索引...")
+        print("[KnowledgeFaiss] build...")
         self.embeddings = self.model.encode(self.documents, convert_to_numpy=True).astype('float32')
         dimension = self.embeddings.shape[1]
-        self.index = faiss.IndexFlatL2(dimension)  # 使用 L2 距离的精确索引
+        self.index = faiss.IndexFlatL2(dimension)
         self.index.add(self.embeddings)
-        print(f"[KnowledgeFaiss] 索引构建完成，文档数量: {len(self.documents)}")
+        print(f"[KnowledgeFaiss] build success,documents: {len(self.documents)}")
 
     def query(self, question: str, top_k: int = 3) -> list[str]:
         query_vec = self.model.encode([question], convert_to_numpy=True).astype('float32')
