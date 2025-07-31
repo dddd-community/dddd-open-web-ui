@@ -11,12 +11,12 @@ class KnowledgeFaiss:
         self.build_index()
 
     def build_index(self):
-        print("[KnowledgeFaiss] build...")
+        print("KnowledgeFaiss build...")
         self.embeddings = self.model.encode(self.documents, convert_to_numpy=True).astype('float32')
         dimension = self.embeddings.shape[1]
         self.index = faiss.IndexFlatL2(dimension)
         self.index.add(self.embeddings)
-        print(f"[KnowledgeFaiss] build success,documents: {len(self.documents)}")
+        print(f"KnowledgeFaiss build success,documents: {len(self.documents)}")
 
     def query(self, question: str, top_k: int = 3) -> list[str]:
         query_vec = self.model.encode([question], convert_to_numpy=True).astype('float32')
