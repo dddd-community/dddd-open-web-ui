@@ -11,7 +11,6 @@ class KnowledgeFaiss:
         self.build_index()
 
     def build_index(self):
-        print("knowledge faiss build...")
         self.embeddings = self.model.encode(self.documents, convert_to_numpy=True).astype('float32')
         dimension = self.embeddings.shape[1]
         self.index = faiss.IndexFlatL2(dimension)
